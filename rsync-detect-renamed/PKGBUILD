@@ -1,0 +1,44 @@
+# Maintainer: Benjamin Abendroth <braph93@gmx.de>
+
+pkgname=rsync-detect-renamed
+pkgver=3.0.9
+pkgrel=1
+pkgdesc="Patched version of rsync with --detect-renamed option"
+arch=('i686' 'x86_64')
+license=('GPL')
+depends=( 'popt' 'acl' )
+conflicts=( 'rsync' )
+optdepends=( )
+provides=('rsync')
+url='http://moderncaveman.org/projects/modern/rsync-detect-renamed/patching-rsync-for-renamed.html'
+source=("https://www.samba.org/ftp/rsync/src/rsync-$pkgver.tar.gz"
+        "https://www.samba.org/ftp/rsync/src/rsync-patches-$pkgver.tar.gz"
+        "detect-renamed.diff::https://attachments.samba.org/attachment.cgi?id=7435")
+md5sums=('5ee72266fe2c1822333c407e1761b92b'
+         '992677c7f1ac2884d9469b3a0eff594a'
+         '2c8044eea52e72eee756f3bd45b535c1')
+
+prepare()
+{
+   cp "detect-renamed.diff" "rsync-$pkgver/patches"
+
+   cd "$srcdir/rsync-$pkgver"
+
+   patch -p0 < "patches/detect-renamed.diff"
+   patch -p1 < "patches/detect-renamed-lax.diff"
+}
+
+build()
+{
+   cd "$srcdir/rsync-$pkgver"
+
+   ./configure --prefix=/usr
+
+   make
+}
+
+package() {
+   cd "$srcdir/rsync-$pkgver"
+
+   make DESTDIR="$pkgdir/" install
+}
