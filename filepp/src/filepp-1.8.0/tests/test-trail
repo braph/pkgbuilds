@@ -1,8 +1,0 @@
-#define FOO CHOMP
-#pragma filepp SetEatTrail FOO
-
-BAR FOO BAR
-BARTAB	FOO   	TABBAR
-BARTAB	FOO	
-DON'T EAT ME! FOO  
-BAR
