@@ -6,19 +6,19 @@
 # Contributor: Ben <ben@benmazer.net>
 
 pkgname=mpd-light
-pkgver=0.18.11
+pkgver=0.19.11
 pkgrel=1
 pkgdesc='Flexible, powerful, server-side application for playing music. Light version without ao, ffmpeg, jack, modplug, pulse, shout, sidplay, soundcloud, wavpack, avahi'
 url='http://www.musicpd.org/'
 license=('GPL')
-arch=('i686' 'x86_64' 'armv6h')
+arch=('armv7h' 'i686' 'x86_64' 'armv6h')
 depends=('audiofile' 'libmad' 'curl' 'faad2' 'sqlite' 'libmms' 'libid3tag' 'libmpdclient')
 makedepends=('doxygen')
 provides=("mpd=$pkgver")
 conflicts=('mpd')
 replaces=('mpd')
 source=("http://www.musicpd.org/download/mpd/${pkgver%.*}/mpd-${pkgver}.tar.xz")
-sha1sums=('34585fcb49107508b198798b5657df07c86157f0')
+sha1sums=('bc39026742b43d851a846b1f09bff94895cd1927')
 
 build() {
 	cd "${srcdir}/mpd-${pkgver}"
@@ -30,20 +30,18 @@ build() {
       --disable-ao \
       --disable-ffmpeg \
       --disable-jack \
-      --disable-alsa \
       --disable-pulse \
       --disable-shout \
       --disable-modplug \
       --disable-sidplay \
       --disable-soundcloud \
       --disable-wavpack \
-      --disable-{inotify,libmpdclient,alsa,cdio-paranoia,despotify,modplug,fluidsynth} \
+      --disable-{inotify,libmpdclient,cdio-paranoia,despotify,modplug,fluidsynth} \
       --disable-{wildmidi,lame-encoder,twolame-encoder,ao,jack,oss,openal,roar,recorder-output} \
-      --disable-{shout,solaris-output,ipv6,sndfile,systemd-daemon,opus,sidplay,gme} \
+      --disable-{shout,solaris-output,ipv6,sndfile,opus,sidplay,gme} \
       --with-zeroconf=no \
-      --disable-systemd-daemon
-
-# --with-systemdsystemunitdir=/usr/lib/systemd/system
+      --with-systemdsystemunitdir=/usr/lib/systemd/system
+#--disable-systemd-daemon
 
 	make
 }
@@ -57,6 +55,6 @@ package() {
 	#install -Dm644 ../mpd.tmpfile "${pkgdir}"/usr/lib/tmpfiles.d/mpd.conf
 	#install -d -g 45 -o 45 "${pkgdir}"/var/lib/mpd/playlists
 
-	#install -Dm644 "${pkgdir}"/usr/lib/systemd/{system,user}/mpd.service
-	#sed '/WantedBy=/c WantedBy=default.target' -i "${pkgdir}"/usr/lib/systemd/user/mpd.service
+	install -Dm644 "${pkgdir}"/usr/lib/systemd/{system,user}/mpd.service
+	sed '/WantedBy=/c WantedBy=default.target' -i "${pkgdir}"/usr/lib/systemd/user/mpd.service
 }
