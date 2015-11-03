@@ -10,7 +10,7 @@ license=('GPL')
 depends=('curl' 'bash')
 makedepends=()
 install='freedns-systemd-timer.install'
-backup=('usr/bin/freedns-update.sh etc/freedns-urls')
+backup=('usr/bin/freedns-update.sh')
 changelog=
 source=(freedns-update.sh freedns-update.service freedns-update.timer freedns-systemd-timer.install)
 noextract=(freedns-update.sh freedns-update.service freedns-update.timer freedns-systemd-timer.install)
@@ -31,9 +31,6 @@ package() {
   cd "$srcdir"
   mkdir -p "$pkgdir/usr/bin"
   cp freedns-update.sh "$pkgdir/usr/bin/"
-  
-  mkdir -p "$pkgdir/etc"
-  echo '#place your direct urls here. should be something similar to "http://freedns.afraid.org/dynamic/update.php?BLABLABLABALBALdasdsadas=="' > "$pkgdir/etc/freedns-urls"
   
   mkdir -p "$pkgdir/usr/lib/systemd/system"
   cp freedns-update.service "$pkgdir/usr/lib/systemd/system/"
