@@ -32,8 +32,7 @@ package() {
   mkdir -p "$pkgdir/usr/bin"
   cp freedns-update.sh "$pkgdir/usr/bin/"
   
-  mkdir -p "$pkgdir/etc/freedns-urls"
-  echo '#place here your direct url, should be something similar to "http://freedns.afraid.org/dynamic/update.php?BLABLABLABALBALdasdsadas=="' > "$pkgdir/etc/freedns-urls"
+  echo '#place your direct urls here. should be something similar to "http://freedns.afraid.org/dynamic/update.php?BLABLABLABALBALdasdsadas=="' > "$pkgdir/etc/freedns-urls"
   
   mkdir -p "$pkgdir/usr/lib/systemd/system"
   cp freedns-update.service "$pkgdir/usr/lib/systemd/system/"
