@@ -1,0 +1,41 @@
+# Maintainer: braph <braph93 AT ... DOT ...> TODO
+
+pkgname=freedns-systemd-timer
+pkgver=1
+pkgrel=1
+pkgdesc="Update freedns.afraid.org using systemd-timer (or do it manually)"
+arch=('any')
+url="http://www.example.com" #todo
+license=('GPL')
+depends=('curl' 'bash')
+makedepends=()
+install='freedns-systemd-timer.install'
+backup=('usr/bin/freedns-update.sh')
+changelog=
+source=(freedns-update.sh freedns-update.service freedns-update.timer freedns-systemd-timer.install)
+noextract=(freedns-update.sh freedns-update.service freedns-update.timer freedns-systemd-timer.install)
+
+md5sums=(
+1bbab3b44819e136d1a78cd12dde8cfa  #freedns-update.sh
+3a82464e399417476ecb7d976541fd7e  #freedns-update.service
+7dee60dcc34a5f05b35a451584058ce1  #freedns-update.timer
+de73cbf8d48c9678e58c4ed2c310e5b9  #freedns-systemd-timer.install
+)
+
+build() {
+	cd "$srcdir"
+	chmod +x ./freedns-update.sh
+}
+
+package() {
+  cd "$srcdir"
+  mkdir -p "$pkgdir/usr/bin"
+  cp freedns-update.sh "$pkgdir/usr/bin/"
+  
+  mkdir -p "$pkgdir/etc/freedns-urls"
+  echo '#place here your direct url, should be something similar to "http://freedns.afraid.org/dynamic/update.php?BLABLABLABALBALdasdsadas=="' > "$pkgdir/etc/freedns-urls"
+  
+  mkdir -p "$pkgdir/usr/lib/systemd/system"
+  cp freedns-update.service "$pkgdir/usr/lib/systemd/system/"
+  cp freedns-update.timer "$pkgdir/usr/lib/systemd/system/"
+}
