@@ -1,0 +1,28 @@
+# Maintainer: braph
+
+pkgname="privoxy-blocklist"
+pkgver=1
+pkgrel=1
+epoch=1
+pkgdesc="Convert adblock plus filter rules to privoxy"
+arch=('any')
+url="https://github.com/Andrwe/privoxy-blocklist"
+#license=('GPL2')
+#depends=('ncurses' 'libmpdclient>=2.8' 'boost-libs' 'readline')
+makedepends=('git')
+conflicts=('ncmpcpp' 'ncmpcpp-xdg-config' 'ncmpcpp-xdg-config-git' 'ncmpcpp-color')
+source=("git+git://github.com/Andrwe/privoxy-blocklist")
+md5sums=('SKIP')
+
+pkgver() {
+  cd "privoxy-blocklist" || exit
+  echo "$(git rev-list --count HEAD).$(git rev-parse --short HEAD)"
+}
+
+package() {
+  cd "$srcdir" || exit 1
+  cd "privoxy-blocklist" || exit 1
+
+  mkdir -p "$pkgdir/usr/bin"
+  cp privoxy-blocklist.sh privoxy-blocklist_test.sh "$pkgdir/usr/bin/"
+}
