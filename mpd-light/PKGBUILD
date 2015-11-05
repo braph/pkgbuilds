@@ -29,19 +29,21 @@ build() {
       --disable-libmpdclient \
       --disable-ao \
       --disable-ffmpeg \
-      --disable-jack \
-      --disable-pulse \
+      --disable-{jack,pulse,oss} \
       --disable-shout \
       --disable-modplug \
       --disable-sidplay \
       --disable-soundcloud \
       --disable-wavpack \
+      --disable-upnp \
+      --disable-smbclient \
+      --disable-nfs \
       --disable-{inotify,libmpdclient,cdio-paranoia,despotify,modplug,fluidsynth} \
-      --disable-{wildmidi,lame-encoder,twolame-encoder,ao,jack,oss,openal,roar,recorder-output} \
+      --disable-{wildmidi,lame-encoder,twolame-encoder,ao,openal,roar,recorder-output} \
       --disable-{shout,solaris-output,ipv6,sndfile,opus,sidplay,gme} \
       --with-zeroconf=no \
       --with-systemdsystemunitdir=/usr/lib/systemd/system
-#--disable-systemd-daemon
+      #--disable-systemd-daemon
 
 	make
 }
