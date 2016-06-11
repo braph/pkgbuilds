@@ -6,19 +6,20 @@
 # Contributor: Ben <ben@benmazer.net>
 
 pkgname=mpd-light
-pkgver=0.19.11
+pkgver=0.19.12
 pkgrel=1
 pkgdesc='Flexible, powerful, server-side application for playing music. Light version without ao, ffmpeg, jack, modplug, pulse, shout, sidplay, soundcloud, wavpack, avahi'
 url='http://www.musicpd.org/'
 license=('GPL')
 arch=('armv7h' 'i686' 'x86_64' 'armv6h')
-depends=('audiofile' 'libmad' 'curl' 'faad2' 'sqlite' 'libmms' 'libid3tag' 'libmpdclient')
+#depends=('audiofile' 'libmad' 'curl' 'faad2' 'sqlite' 'libmms' 'libid3tag' 'libmpdclient')
+depends=('audiofile' 'libmad' 'libid3tag' 'curl' 'libvorbis' 'lame')
 makedepends=('doxygen')
 provides=("mpd=$pkgver")
 conflicts=('mpd')
 replaces=('mpd')
 source=("http://www.musicpd.org/download/mpd/${pkgver%.*}/mpd-${pkgver}.tar.xz")
-sha1sums=('bc39026742b43d851a846b1f09bff94895cd1927')
+sha1sums=('9de55e24d2612526ca8eb688126d0784339f2ee8')
 
 build() {
 	cd "${srcdir}/mpd-${pkgver}"
@@ -38,6 +39,7 @@ build() {
       --disable-upnp \
       --disable-smbclient \
       --disable-nfs \
+      --disable-mms \
       --disable-{inotify,libmpdclient,cdio-paranoia,despotify,modplug,fluidsynth} \
       --disable-{wildmidi,lame-encoder,twolame-encoder,ao,openal,roar,recorder-output} \
       --disable-{shout,solaris-output,ipv6,sndfile,opus,sidplay,gme} \
