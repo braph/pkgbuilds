@@ -1,0 +1,77 @@
+# $Id$
+# Maintainer: Jan de Groot <jgc@archlinux.org>
+# Contributor: Alexander Baldeck <alexander@archlinux.org>
+
+pkgname=xterm
+pkgver=322
+pkgrel=1
+pkgdesc="X Terminal Emulator"
+arch=(armv7h 'i686' 'x86_64')
+url="http://invisible-island.net/xterm/"
+#license=('custom')
+depends=('libxft' 'libxaw' 'ncurses' 'xorg-luit' 'xbitmaps' 'libutempter' 'libxkbfile')
+source=(ftp://invisible-island.net/${pkgname}/${pkgname}-${pkgver}.tgz)
+md5sums=('9ea4c83ac7275fdecf39fde9db781fac')
+
+build() {
+  cd ${pkgname}-${pkgver}
+  ./configure --prefix=/usr \
+      --libdir=/etc \
+      --mandir=/usr/share/man \
+      --with-app-defaults=/usr/share/X11/app-defaults/ \
+      --with-x \
+      --disable-full-tgetent \
+      --disable-imake \
+      --enable-ansi-color \
+      --enable-88-color \
+      --enable-256-color \
+      --enable-broken-osc \
+      --enable-broken-st \
+      --enable-load-vt-fonts \
+      --enable-i18n \
+      --enable-wide-chars \
+      --enable-doublechars \
+      --enable-warnings \
+      --enable-tcap-query \
+      --enable-logging \
+      --enable-dabbrev \
+      --enable-freetype \
+      --enable-luit \
+      --enable-mini-luit \
+      --enable-narrowproto \
+      --enable-exec-xterm \
+      --with-tty-group=tty \
+      --with-utempter \
+      \
+      --disable-builtin-xpms \
+      --disable-double-buffer \
+      --disable-hp-fkeys \
+      --disable-sco-fkeys \
+      --disable-sun-fkeys \
+      --disable-logging \
+      --disable-maximize \
+      --disable-numlock \
+      --disable-regex \
+      --disable-rightbar \
+      --disable-session-mgt \
+      --disable-tek4014 \
+      --disable-toolbar \
+      --disable-vt52 \
+      --disable-regis-graphics \
+      --disable-sixel-graphics \
+      --disable-ziconbeep
+
+  make
+}
+
+package() {
+  cd ${pkgname}-${pkgver}
+  make DESTDIR="${pkgdir}" install
+  chmod 0755 "${pkgdir}/usr/bin/xterm"
+
+  #install -m755 -d "${pkgdir}/usr/share/licenses/${pkgname}"
+  #install -m644 "${srcdir}/LICENSE" \
+  #    "${pkgdir}/usr/share/licenses/${pkgname}/"
+  #install -m755 -d ${pkgdir}/usr/share/applications
+  #install -m644 ${srcdir}/${pkgname}-${pkgver}/{xterm,uxterm}.desktop ${pkgdir}/usr/share/applications/
+}
