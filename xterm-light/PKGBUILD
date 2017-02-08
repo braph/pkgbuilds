@@ -69,9 +69,9 @@ package() {
   make DESTDIR="${pkgdir}" install
   chmod 0755 "${pkgdir}/usr/bin/xterm"
 
-  install -m755 -d "${pkgdir}/usr/share/licenses/${pkgname}"
-  install -m644 "${srcdir}/LICENSE" \
-      "${pkgdir}/usr/share/licenses/${pkgname}/"
-  install -m755 -d ${pkgdir}/usr/share/applications
-  install -m644 ${srcdir}/${pkgname}-${pkgver}/{xterm,uxterm}.desktop ${pkgdir}/usr/share/applications/
+  #install -m755 -d "${pkgdir}/usr/share/licenses/${pkgname}"
+  #install -m644 "${srcdir}/LICENSE" \
+  #    "${pkgdir}/usr/share/licenses/${pkgname}/"
+  #install -m755 -d ${pkgdir}/usr/share/applications
+  #install -m644 ${srcdir}/${pkgname}-${pkgver}/{xterm,uxterm}.desktop ${pkgdir}/usr/share/applications/
 }
