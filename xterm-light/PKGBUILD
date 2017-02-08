@@ -11,7 +11,7 @@ url="http://invisible-island.net/xterm/"
 #license=('custom')
 depends=('libxft' 'libxaw' 'ncurses' 'xorg-luit' 'xbitmaps' 'libutempter' 'libxkbfile')
 source=(ftp://invisible-island.net/${pkgname}/${pkgname}-${pkgver}.tgz)
-md5sums=('9ea4c83ac7275fdecf39fde9db781fac')
+md5sums=('3c32e931adcad44e64e57892e75d9e02')
 
 build() {
   cd ${pkgname}-${pkgver}
