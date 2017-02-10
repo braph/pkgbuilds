@@ -35,8 +35,8 @@ build() {
       --enable-narrowproto \
       --enable-exec-xterm \
       --with-tty-group=tty \
-      --with-utempter \
       \
+      --without-utempter \
       --disable-fifo-lines \
       --disable-paste64 \
       --disable-screen-dumps \
@@ -57,6 +57,7 @@ build() {
       --disable-session-mgt \
       --disable-tek4014 \
       --disable-toolbar \
+      --disable-trace \
       --disable-vt52 \
       --disable-regis-graphics \
       --disable-sixel-graphics \
