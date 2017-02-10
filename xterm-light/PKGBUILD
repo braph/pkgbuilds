@@ -20,21 +20,15 @@ build() {
       --mandir=/usr/share/man \
       --with-app-defaults=/usr/share/X11/app-defaults/ \
       --with-x \
-      --disable-full-tgetent \
-      --disable-imake \
       --enable-ansi-color \
       --enable-88-color \
       --enable-256-color \
-      --enable-broken-osc \
-      --enable-broken-st \
       --enable-load-vt-fonts \
       --enable-i18n \
       --enable-wide-chars \
       --enable-doublechars \
       --enable-warnings \
       --enable-tcap-query \
-      --enable-logging \
-      --enable-dabbrev \
       --enable-freetype \
       --enable-luit \
       --enable-mini-luit \
@@ -43,6 +37,14 @@ build() {
       --with-tty-group=tty \
       --with-utempter \
       \
+      --disable-fifo-lines \
+      --disable-paste64 \
+      --disable-screen-dumps \
+      --disable-dabbrev \
+      --disable-broken-osc \
+      --disable-broken-st \
+      --disable-full-tgetent \
+      --disable-imake \
       --disable-builtin-xpms \
       --disable-double-buffer \
       --disable-hp-fkeys \
