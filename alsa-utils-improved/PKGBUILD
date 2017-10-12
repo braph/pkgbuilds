@@ -1,0 +1,35 @@
+# $Id$
+# Maintainer: Benjamin Abendroth <braph93@gmx.de>
+
+pkgname=alsa-utils-improved
+pkgver=1.1.4
+pkgrel=1
+pkgdesc="alsa-utils with configurable alsamixer and mouse support"
+arch=('i686' 'x86_64')
+url="https://github.com/braph/alsautils-improved"
+#can not use >=$pkgver due to use of letters in alsa-lib update versioning
+depends=("alsa-lib>1.0.24" 'pciutils' 'ncurses' 'psmisc' 'libsamplerate' 'fftw')
+#makedepends=('xmlto' 'docbook-xsl')
+makedepends=()
+license=('GPL')
+conflicts=('alsa-utils')
+provides=('alsa-utils')
+source=(git+git://github.com/braph/alsautils-improved)
+md5sums=('SKIP')
+
+build() {
+  cd alsautils-improved
+  autoreconf -fiv
+  ./configure --prefix=/usr --disable-alsaconf --sbindir=/usr/bin \
+    --with-udev-rules-dir=/usr/lib/udev/rules.d \
+    --with-systemdsystemunitdir=/usr/lib/systemd/system
+  make
+}
+
+package() {
+  cd alsautils-improved
+  make DESTDIR="${pkgdir}" install
+
+  # dir where to save ALSA state
+  install -d "${pkgdir}/var/lib/alsa"
+}
